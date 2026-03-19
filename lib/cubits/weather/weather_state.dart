@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 part of 'weather_cubit.dart';
 
 enum WeatherStatus {
