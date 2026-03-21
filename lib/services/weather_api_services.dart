@@ -25,6 +25,7 @@ class WeatherApiServices {
     );
 
     try {
+
       final http.Response response = await httpClient.get(uri);
 
       if (response.statusCode != 200) {
@@ -51,7 +52,7 @@ class WeatherApiServices {
       host: kApiHost,
       path: '/data/2.5/weather',
       queryParameters: {
-        'lat': '${directGeocoding.let}',
+        'lat': '${directGeocoding.lat}',
         'lon': '${directGeocoding.lon}',
         'units': kUnit,
         'appid': dotenv.env['APPID'],
@@ -59,21 +60,19 @@ class WeatherApiServices {
     );
 
     try {
-       final http.Response response = await httpClient.get(uri);
+      final http.Response response = await httpClient.get(uri);
 
-       if(response.statusCode != 200) {
+      if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
-       }
+      }
 
-       final weatherJson = json.decode(response.body);
+      final weatherJson = json.decode(response.body);
 
-       final Weather weather = Weather.fromJson(weatherJson);
+      final Weather weather = Weather.fromJson(weatherJson);
 
-       return weather;
-
+      return weather;
     } catch (e) {
       rethrow;
     }
-
   }
 }

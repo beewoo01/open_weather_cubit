@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:open_weather_cubit/models/custom_error.dart';
 import 'package:open_weather_cubit/models/weather.dart';
@@ -16,8 +16,9 @@ class WeatherCubit extends Cubit<WeatherState> {
     emit(state.copyWith(status: WeatherStatus.loading));
 
     try {
+      print('11111 state: $state');
       final Weather weather = await weatherRepository.fetchWeather(city);
-
+      print('22222 state: $state');
       emit(state.copyWith(status: WeatherStatus.loaded, weather: weather));
       print('state: $state');
     } on CustomError catch (e) {
